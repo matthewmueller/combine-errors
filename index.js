@@ -1,4 +1,10 @@
 /**
+ * Remove the "Error:" on the front of message
+ */
+
+var rerror = /^Error:/
+
+/**
  * Export `Error`
  */
 
@@ -37,7 +43,7 @@ error.prototype.__defineGetter__('stack', function() {
  */
 
 error.prototype.__defineGetter__('message', function() {
-  return this.errors.join(', ')
+  return this.errors.map(message).join(',')
 })
 
 /**
@@ -45,7 +51,7 @@ error.prototype.__defineGetter__('message', function() {
  */
 
 error.prototype.toString = function () {
-  return this.errors.join(', ')
+  return this.errors.map(message).join(',')
 }
 
 /*
@@ -54,3 +60,15 @@ error.prototype.toString = function () {
 
 error.prototype.splice = Array.prototype.splice
 error.prototype.length = 0
+
+/**
+ * Message
+ *
+ * @param {String} message
+ * @return {String}
+ */
+
+function message (err) {
+  if (!err.message) return err.message
+  return err.message.replace(rerror, '')
+}
