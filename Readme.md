@@ -8,7 +8,7 @@
 ## Features
 
 - `error instanceof Error === true`
-- composable: `error(error([err1, err2]), err3)`
+- composable: `error([error([err1, err2]), err3])`
 - stack and message are combined in a nice way
 - array-like object, so you can access the original errors by looping over the error
 - If you just have one error, it looks exactly like raw error meaning, `error(err).message === err.message && error(err).stack === err.stack`
