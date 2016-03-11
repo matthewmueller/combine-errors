@@ -1,0 +1,14 @@
+{
+  "name": "combine-errors",
+  "version": "0.0.1",
+  "description": "Combine errors into one",
+  "keywords": [],
+  "author": "Matthew Mueller <mattmuelle@gmail.com>",
+  "repository": { "type": "git", "url": "git://github.com/MatthewMueller/combine-errors.git" },
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "main": "index"
+}
