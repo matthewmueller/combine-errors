@@ -13,6 +13,7 @@
 - array-like object, so you can access the original errors by looping over the error
 - If you just have one error, it looks exactly like one error meaning, `error(err).message = err.message && error(err).stack === err.stack`
 - zero dependencies
+- should work in the browser, though I haven't tested it yet
 
 ## Installation
 
