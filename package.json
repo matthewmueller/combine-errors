@@ -1,10 +1,19 @@
 {
   "name": "combine-errors",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Combine errors into one",
-  "keywords": ["combine", "errors", "compose", "error", "handling"],
+  "keywords": [
+    "combine",
+    "errors",
+    "compose",
+    "error",
+    "handling"
+  ],
   "author": "Matthew Mueller <mattmuelle@gmail.com>",
-  "repository": { "type": "git", "url": "git://github.com/MatthewMueller/combine-errors.git" },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MatthewMueller/combine-errors.git"
+  },
   "dependencies": {},
   "main": "index"
 }
