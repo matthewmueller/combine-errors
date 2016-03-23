@@ -43,7 +43,7 @@ error.prototype.__defineGetter__('stack', function() {
  */
 
 error.prototype.__defineGetter__('message', function() {
-  return this.errors.map(message).join(',')
+  return this.errors.map(message).join('; ')
 })
 
 /**
@@ -51,7 +51,7 @@ error.prototype.__defineGetter__('message', function() {
  */
 
 error.prototype.toString = function () {
-  return this.errors.map(message).join(',')
+  return this.errors.map(message).join('; ')
 }
 
 /*
