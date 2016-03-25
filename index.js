@@ -1,6 +1,16 @@
+'use strict'
+
+/**
+ * Module Dependencies
+ */
+
+var Custom = require('custom-error-instance')
+
 /**
  * Remove the "Error:" on the front of message
  */
+
+let MultiError = Custom('MultiError')
 
 var rerror = /^Error:/
 
@@ -17,58 +27,19 @@ module.exports = error
 function error (errors) {
   if (!(this instanceof error)) return new error(errors)
   errors = Array.isArray(errors) ? errors : [ errors ]
-  for (var i = 0; i < errors.length; i++) this[i] = errors[i]
-  this.length = errors.length
-  this.errors = errors
-}
+  if (errors.length === 1) return errors[0]
 
-/**
- * Extend `Error`
- */
+  let multierror = new MultiError(errors.map(err => err.message).join('; '))
+  multierror.errors = errors.reduce((errs, err) => errs.concat(err.errors || err), [])
+  multierror.length = errors.length
 
-error.prototype = Object.create(Error.prototype)
+  // overwrite the stack to show both errors in full
+  multierror.__defineSetter__('stack', stack => stack)
+  multierror.__defineGetter__('stack', function() {
+    return errors.map(function (err) {
+      return err.stack
+    }).join('\n\n')
+  })
 
-/**
- * Lazily define stack
- */
-
-error.prototype.__defineGetter__('stack', function() {
-  return this.errors.map(function (err) {
-    return err.stack
-  }).join('\n\n')
-})
-
-/**
- * Lazily define message
- */
-
-error.prototype.__defineGetter__('message', function() {
-  return this.errors.map(message).join('; ')
-})
-
-/**
- * toString
- */
-
-error.prototype.toString = function () {
-  return this.errors.map(message).join('; ')
-}
-
-/*
- * Make error array-like
- */
-
-error.prototype.splice = Array.prototype.splice
-error.prototype.length = 0
-
-/**
- * Message
- *
- * @param {String} message
- * @return {String}
- */
-
-function message (err) {
-  if (!err.message) return err.message
-  return err.message.replace(rerror, '')
+  return multierror
 }

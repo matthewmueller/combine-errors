@@ -1,9 +1,56 @@
-var error = require('./')
+'use strict'
 
-var a = new Error('a')
+/**
+ * Module Dependencies
+ */
 
-console.log('error(a).message === a.message', error(a).message === a.message)
-console.log('error(a).stack === a.stack', error(a).stack === a.stack)
-console.log('error(a) instanceof Error', error(a) instanceof Error)
-// throw error(a)
-// throw a
+let assert = require('assert')
+var errors = require('./')
+
+/**
+ * Tests
+ */
+
+describe('combine-errors', function() {
+  it('should pass through single errors', function() {
+    var a = new TypeError('a')
+    assert.ok(errors(a).message === a.message)
+    assert.ok(errors(a).stack === a.stack)
+    assert.ok(errors(a) instanceof Error)
+  })
+
+  it('should create a multierror for multiple errors', function() {
+    var a = new TypeError('a')
+    var b = new Error('b')
+    var err = errors([a, b])
+    assert.ok(err instanceof Error)
+    assert.equal(err.message, 'a; b')
+    assert.ok(~err.stack.indexOf('TypeError: a'))
+    assert.ok(~err.stack.indexOf('Error: b'))
+  })
+
+  it('should allow you to overwrite the message', function() {
+    var a = new TypeError('a')
+    var b = new Error('b')
+    var err = errors([a, b])
+    assert.ok(err instanceof Error)
+    err.message = err.message + ' (at: file)'
+    assert.equal(err.message, 'a; b (at: file)')
+    assert.ok(~err.stack.indexOf('TypeError: a'))
+    assert.ok(~err.stack.indexOf('Error: b'))
+  })
+
+  it('should compose nicely', function() {
+    var a = new SyntaxError('a')
+    var b = new TypeError('b')
+    var c = new Error('c')
+    var ab = errors([a, b])
+    var abc = errors([ab, c])
+    abc.message = abc.message + ' (at: file)'
+    assert.equal(abc.message, 'a; b; c (at: file)')
+    assert.ok(~abc.stack.indexOf('SyntaxError: a'))
+    assert.ok(~abc.stack.indexOf('TypeError: b'))
+    assert.ok(~abc.stack.indexOf('Error: c'))
+    assert.equal(abc.errors.length, 3)
+  })
+})
