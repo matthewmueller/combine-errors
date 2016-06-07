@@ -1,4 +1,9 @@
 
+3.0.2 / 2016-06-07
+==================
+
+  * fix combining repeated errors and handle the stack better
+
 3.0.1 / 2016-04-24
 ==================
 
