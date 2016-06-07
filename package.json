@@ -15,7 +15,8 @@
     "url": "git://github.com/MatthewMueller/combine-errors.git"
   },
   "dependencies": {
-    "custom-error-instance": "2.1.1"
+    "custom-error-instance": "2.1.1",
+    "lodash.uniqby": "4.5.0"
   },
   "main": "index",
   "devDependencies": {

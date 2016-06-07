@@ -29,6 +29,14 @@ describe('combine-errors', function() {
     assert.ok(~err.stack.indexOf('Error: b'))
   })
 
+  it('should group multiple errors that are the same into one', function() {
+    var a = new TypeError('a')
+    var err = errors([a, a])
+    assert.ok(err instanceof Error)
+    assert.equal(err.message, 'a')
+    assert.ok(~err.stack.indexOf('TypeError: a'))
+  })
+
   it('should allow you to overwrite the message', function() {
     var a = new TypeError('a')
     var b = new Error('b')
