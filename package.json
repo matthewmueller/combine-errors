@@ -1,6 +1,6 @@
 {
   "name": "combine-errors",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "Combine errors into one",
   "keywords": [
     "combine",
@@ -22,5 +22,5 @@
   "devDependencies": {
     "mocha": "2.4.5"
   },
-  "license":"MIT"
+  "license": "MIT"
 }
