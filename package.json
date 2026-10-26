@@ -2,6 +2,7 @@
   "name": "combine-errors",
   "version": "3.0.3",
   "description": "Combine errors into one",
+  "license": "MIT",
   "keywords": [
     "combine",
     "errors",
