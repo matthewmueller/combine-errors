@@ -1,9 +1,8 @@
-
 # combine-errors
 
-  Simple way to combine multiple errors into one.
+Simple way to combine multiple errors into one.
 
-  This is useful for handling multiple asynchronous errors, where you want to catch all the errors and combine them to return just a single error.
+This is useful for handling multiple asynchronous errors, where you want to catch all the errors and combine them to return just a single error.
 
 ## Features
 
@@ -23,11 +22,8 @@ npm install combine-errors
 ## Usage
 
 ```js
-var error = require('combine-errors')
-var err = error([
-  new Error('boom'),
-  new Error('kablam')
-])
+var error = require("combine-errors")
+var err = error([new Error("boom"), new Error("kablam")])
 throw err
 /*
 =>
@@ -59,4 +55,4 @@ Error: kablam
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [./License.md] file for details.
