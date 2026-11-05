@@ -10,6 +10,7 @@
     "handling"
   ],
   "author": "Matthew Mueller <mattmuelle@gmail.com>",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/MatthewMueller/combine-errors.git"
